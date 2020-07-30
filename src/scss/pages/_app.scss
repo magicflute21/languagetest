@@ -1,0 +1,106 @@
+.app {
+    background-color: white;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+
+    .projectname {
+        color: black;
+        padding: .3em;
+    }
+
+    .app-action {
+        z-index: 1;
+        background-color: white;
+        border-radius: 20px;
+        min-height: 550px;
+        width: 450px;
+        -webkit-box-shadow: 0px 0px 78px 6px rgba(173,173,173,.7);
+        -moz-box-shadow: 0px 0px 78px 6px rgba(173,173,173,.7);
+        box-shadow: 0px 0px 78px 6px rgba(173,173,173,.7);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+
+        &__wrap {
+            margin-top: 15%;
+            width: 80%;
+            height: 65%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            // background-color: lightgrey;
+
+            p {
+                padding: 0 15px;
+                line-height: 2.8;
+            }
+
+            .lesson {
+                font-weight: 600;
+
+                span {
+                    color: green;
+                }
+            }
+
+            .test {
+                margin-top: 20px;
+            }
+
+            .pancake {
+                position: absolute;
+                top: 170px;
+                padding: 0 15px;
+            }
+
+            div {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                height: 25px;
+
+                .drag {
+                    margin: 0 5px;
+                }
+            }
+
+            .drop {
+                display: inline-block;
+                // visibility: hidden;
+                width: 50px;
+                height: 35px;
+                border-bottom: 1px solid green;
+                margin-right: 5px;
+                vertical-align: text-bottom; 
+                line-height: 1;
+                text-align: center;            
+            }
+        }
+        button {
+            padding: 10px 40px;
+            background-color: rgb(51, 209, 51);
+            border-radius: 30px;
+            position: absolute;
+            bottom: 50px;
+            color: white;
+            font-weight: 600;
+            box-shadow: 1px 3px 0 0 rgb(30, 128, 30);
+            transition: .1s;
+
+            &:active {
+                background-color: rgb(44, 192, 44);
+                box-shadow: 0 1px 0 0 green;
+                bottom: 46px;
+            }
+        }
+
+    }
+}
