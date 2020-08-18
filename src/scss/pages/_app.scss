@@ -124,7 +124,13 @@
             color: white;
             font-weight: 600;
             box-shadow: 1px 3px 0 0 rgb(30, 128, 30);
-            transition: .1s;
+            opacity: 1;
+            
+            // transition: .1s;
+            p {
+                font-family: Arial, sans-serif !important;
+                font-size: 1.1rem;
+            }
 
             &:active {
                 background-color: rgb(44, 192, 44);

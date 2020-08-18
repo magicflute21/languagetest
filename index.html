@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./dist/bundle.css">
+    <!-- this bundle.css seems pointless right now -->
     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
     <link rel="icon" href="./dist/images/icon.png">
     <title>Lingua franca</title>
@@ -23,13 +24,13 @@
                     <span id="drop3" class="drop destination"></span> grande del día.
                 </p>
                 <div id="dragcontainer" class="dragcontainer">
-                    <div class="drop startposition">
+                    <div id="drag11" class="drop startposition">
                         <span id="drag1" class="drag" draggable="true">ser</span>
                     </div>
-                    <div class="drop startposition">
+                    <div id="drag22" class="drop startposition">
                         <span id="drag2" class="drag" draggable="true">más</span>
                     </div>
-                    <div class="drop startposition">
+                    <div id="drag33" class="drop startposition">
                         <span id="drag3" class="drag" draggable="true">debe</span>
                     </div>
                 </div>
@@ -37,7 +38,7 @@
             <div id="alertbox" class="alertbox">
                 <p id="message" class="message">.</p>
             </div>
-            <button id="check">check</button>
+            <button id="check"><p id="buttonTxt">check</p></button>
         </div>
     </div>
     <script src="./dist/bundle.js"></script>

@@ -8,59 +8,48 @@ const alertbox = document.getElementById('alertbox');
 const message = document.getElementById('message');
 
 const startposition = document.querySelectorAll('.startposition');
-// static list, NodeList Object
+
+console.dir(dragcontainer);
 
 // drag listeners
 
 for(const word of words){
     word.addEventListener('dragstart', dragStart);
-    word.addEventListener('dragend', dragEnd);
 }
 
 // drag functions
 
 function dragStart(e){
     e.dataTransfer.setData("text/plain", e.target.id);
-    // console.log(e.target.id);  
-    // saame kätte liigutatava elemendi id
 }
 
-function dragEnd(e){
-    // this.className = 'drag';
-    // console.log('ended dragging');
-}
+
 
 for(const drop of dropspans){
     drop.addEventListener('dragover', dragOver);
-    drop.addEventListener('dragenter', dragEnter);
-    drop.addEventListener('drop', dragDrop);
+    drop.addEventListener('drop', function(){
+        dragDrop(event, this);
+    }, false);
 }
 
-// forEach is more popular though
 
 function dragOver(e) {
     // w/o preventDefault, the drop event won't fire
     e.preventDefault();
-    // console.log('dragover');
 }
 
-function dragEnter(){
-    // console.log('dragenter');
-}
 
-// veel tuleks kuidagi ära keelata see, et mitut sõna ühte lahtrisse visatakse
-function dragDrop(e){
-    e.preventDefault();
-    // getting the id name of the drop target
-    var data = e.dataTransfer.getData("text");   
-    e.target.appendChild(document.getElementById(data));
-    // and clear the drag data cache
-    e.dataTransfer.clearData();  
+function dragDrop(ev, el) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text"); 
+    
+    if(ev.target.classList.contains('destination')){
+        ev.target.style.height = '19px';        
+    } 
 
-    // change the height of drop destination (with green underlines)
-    if(e.target.classList.contains('destination')){
-        e.target.style.height = '19px';
-    }    
+    if(el.childElementCount < 1){
+        el.appendChild(document.getElementById(data));
+    }
 
 }
 
@@ -83,45 +72,80 @@ function insertMessage(bu){
     message.innerHTML = bu;
 }
 
-
 function check(){
 
-    // pop up of alert
     alertbox.style.height = '110px';
     message.style.display = 'block';
 
-// ----------------------------------------------------
 if(destination[0].firstElementChild === null || destination[1].firstElementChild === null || destination[2].firstElementChild === null){
-    console.log('gotta fill all the blanks');
     insertMessage('Please fill all the blanks');
 }
 
 else if(drop1.firstElementChild.id == 'drag3' && drop2.firstElementChild.id == 'drag1'){
-    console.log("that's correct!");
     insertMessage("That's correct!");
 }
 else {
     insertMessage('Try again!');
+    fadeOut();
+}
+
+
+const buttonTxt = document.getElementById('buttonTxt');
+var opacity = Number(window.getComputedStyle(buttonTxt).getPropertyValue("opacity"));
+
+
+function fadeOut(){
+    var k = setInterval(function(){
+        
+        if(opacity >= 0.1){
+            opacity -= .1;
+            buttonTxt.style.opacity = opacity;
+        }
+        else {
+            clearInterval(k);
+            fadeIn();
+            button.removeEventListener('click', check);
+        }
+    }, 30);
+}
+
+function fadeIn(){
+    buttonTxt.innerHTML = "again";
+    var h = setInterval(function(){
+
+        if (opacity == 1){
+            clearInterval(h);
+        }
+        else {
+            opacity += .1;
+            buttonTxt.style.opacity = opacity;
+            button.addEventListener('click', refresh);
+        }
+    }, 30)
+}
+
+// vajutades nuppu 'again' käivitub funktsioon refresh
+
+function refresh() {
+
+    alertbox.style.height = '0px';
+    message.style.display = 'none';
+
+    button.removeEventListener('click', refresh);
+    button.addEventListener('click', check);
+    buttonTxt.innerHTML = "check";
+
+    // words would go back to their original places:
+    drag11.appendChild(drag1);
+    drag22.appendChild(drag2);
+    drag33.appendChild(drag3);
 }
 }
-// algselt proovisin iteratsioonidega, aga praegune lahendus töötab palju paremini
-// ----------xxxxxxxxxx---------------xxxxxxxxxx-----------------xxxxxxxx---
 
-    // nii, see töötab nüüd nii nagu vaja.. kas sama asja saaks ümber teha 
-    // ka klassikaliseks i for loopiks?
 
-    // for( const dest of destination.values()){
-    //     if(dest.firstElementChild === null){
 
-    //         console.log('Please fill all the blanks');
-    //         insertMessage('Please fill all the blanks');
-    //         // break will break out of for loop
-    //         // break;
-    //         // return;            
-    //     }
 
-    //     console.log('still inside for loop');
-    // }
+// document.getElementById('button').onclick = function(){alert('hello world');}
+// niimoodi saab ka anda evente nupule. Noded on objektid. property onclick saab value function
 
-    // console.log('continue');
-    // insertMessage('all the blanks are filled');
+// document.getElementById('drag1').addEventListener('click', function() {alert('hello world')});
