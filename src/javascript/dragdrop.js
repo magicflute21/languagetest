@@ -9,7 +9,6 @@ const message = document.getElementById('message');
 
 const startposition = document.querySelectorAll('.startposition');
 
-console.dir(dragcontainer);
 
 // drag listeners
 
