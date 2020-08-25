@@ -3,7 +3,7 @@ const dropspans = document.querySelectorAll('.drop');
 const button = document.getElementById('check');
 
 // check function variables
-const dragcontainer = document.getElementById('dragcontainer');
+// const dragcontainer = document.getElementById('dragcontainer');
 const alertbox = document.getElementById('alertbox');
 const message = document.getElementById('message');
 
